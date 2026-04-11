@@ -1,6 +1,7 @@
 package io.github.jason13official.examplemod.platform.services;
 
 import java.nio.file.Path;
+import net.minecraft.world.item.CreativeModeTab;
 
 public interface IPlatformHelper {
 
@@ -42,4 +43,6 @@ public interface IPlatformHelper {
 
     return getGameDirectory().resolve("config");
   }
+
+  CreativeModeTab.Builder tabBuilder();
 }
