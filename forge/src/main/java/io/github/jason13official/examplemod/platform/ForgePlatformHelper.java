@@ -48,7 +48,7 @@ public class ForgePlatformHelper implements IPlatformHelper {
 
   @Override
   public SpawnEggItem createSpawnEggItem(Supplier<EntityType<? extends Mob>> typeSupplier, int background, int highlight, Properties properties) {
-    
+
     return new ForgeSpawnEggItem(typeSupplier, background, highlight, properties);
   }
 }

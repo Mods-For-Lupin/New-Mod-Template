@@ -27,3 +27,10 @@ issueTrackerURL="${mod_url}/issues" #optional
     versionRange = "${forge_minecraft_version_range}"
     ordering = "NONE"
     side = "BOTH"
+
+[[dependencies.${mod_id}]]
+    modId = "monolib"
+    mandatory = true
+    versionRange = "[0,)"
+    ordering = "NONE"
+    side = "BOTH"
