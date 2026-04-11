@@ -1,7 +1,7 @@
-package com.example.examplemod.platform;
+package io.github.jason13official.examplemod.platform;
 
-import com.example.examplemod.Constants;
-import com.example.examplemod.platform.services.IPlatformHelper;
+import io.github.jason13official.examplemod.Constants;
+import io.github.jason13official.examplemod.platform.services.IPlatformHelper;
 
 import java.util.ServiceLoader;
 
