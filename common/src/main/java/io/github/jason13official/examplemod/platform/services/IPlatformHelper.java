@@ -39,6 +39,7 @@ public interface IPlatformHelper {
   Path getGameDirectory();
 
   default Path getConfigDirectory() {
+
     return getGameDirectory().resolve("config");
   }
 }
