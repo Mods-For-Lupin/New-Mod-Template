@@ -1,6 +1,6 @@
 {
     "schemaVersion": 1,
-    "id": "mod_id",
+    "id": "examplemod",
     "version": "${version}",
     "name": "${mod_name}",
     "description": "${description}",
@@ -16,7 +16,7 @@
     "environment": "*",
     "entrypoints": {
         "main": [
-          "io.github.jason13official.examplemod.ExampleMod"
+            "io.github.jason13official.examplemod.ExampleModFabric"
         ]
     },
     "mixins": [
