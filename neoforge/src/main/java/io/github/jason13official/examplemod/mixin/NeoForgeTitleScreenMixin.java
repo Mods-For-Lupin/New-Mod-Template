@@ -15,7 +15,7 @@ public class NeoForgeTitleScreenMixin {
   private void init(CallbackInfo info) {
 
     if (Services.PLATFORM.isDevelopmentEnvironment()) {
-      Constants.LOG.info("This line is printed by an example mixin from Forge!");
+      Constants.LOG.info("This line is printed by an example mixin from NeoForge!");
     }
   }
 }
