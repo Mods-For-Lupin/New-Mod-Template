@@ -1,5 +1,7 @@
 package io.github.jason13official.examplemod.platform.services;
 
+import java.nio.file.Path;
+
 public interface IPlatformHelper {
 
   /**
@@ -32,5 +34,11 @@ public interface IPlatformHelper {
   default String getEnvironmentName() {
 
     return isDevelopmentEnvironment() ? "development" : "production";
+  }
+
+  Path getGameDirectory();
+
+  default Path getConfigDirectory() {
+    return getGameDirectory().resolve("config");
   }
 }

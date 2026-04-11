@@ -17,7 +17,7 @@ public class ExampleModForge {
     EVENT_BUS = context.getModEventBus();
 
     EVENT_BUS.addListener((Consumer<FMLCommonSetupEvent>) event -> ExampleMod.init());
-    
+
     if (FMLLoader.getDist() == Dist.CLIENT) {
       new ExampleModClientForge(EVENT_BUS);
     }

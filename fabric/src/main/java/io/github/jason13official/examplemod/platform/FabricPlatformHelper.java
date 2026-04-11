@@ -1,12 +1,14 @@
 package io.github.jason13official.examplemod.platform;
 
 import io.github.jason13official.examplemod.platform.services.IPlatformHelper;
+import java.nio.file.Path;
 import net.fabricmc.loader.api.FabricLoader;
 
 public class FabricPlatformHelper implements IPlatformHelper {
 
   @Override
   public String getPlatformName() {
+    
     return "Fabric";
   }
 
@@ -20,5 +22,10 @@ public class FabricPlatformHelper implements IPlatformHelper {
   public boolean isDevelopmentEnvironment() {
 
     return FabricLoader.getInstance().isDevelopmentEnvironment();
+  }
+
+  @Override
+  public Path getGameDirectory() {
+    return FabricLoader.getInstance().getGameDir();
   }
 }
