@@ -1,7 +1,12 @@
 package io.github.jason13official.examplemod.platform.services;
 
 import java.nio.file.Path;
+import java.util.function.Supplier;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item.Properties;
+import net.minecraft.world.item.SpawnEggItem;
 
 public interface IPlatformHelper {
 
@@ -45,4 +50,6 @@ public interface IPlatformHelper {
   }
 
   CreativeModeTab.Builder tabBuilder();
+
+  SpawnEggItem createSpawnEggItem(Supplier<EntityType<? extends Mob>> typeSupplier, int background, int highlight, Properties properties);
 }
