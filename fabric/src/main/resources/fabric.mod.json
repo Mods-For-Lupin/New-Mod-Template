@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
-  "id": "examplemod",
+  "id": "${mod_id}",
   "version": "${version}",
   "name": "${mod_name}",
-  "description": "${description}",
+  "description": "${description} ${credits}",
   "authors": [
     "${mod_author}"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "homepage": "${mod_url}",
+    "sources": "${mod_url}"
   },
   "license": "${license}",
   "icon": "${mod_id}.png",
@@ -29,7 +29,7 @@
   "depends": {
     "fabricloader": ">=0.14",
     "fabric": "*",
-    "minecraft": "${minecraft_version}",
+    "minecraft": "${fabric_minecraft_version_range}",
     "java": ">=17"
   },
   "suggests": {
