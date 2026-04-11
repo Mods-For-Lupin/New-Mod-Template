@@ -9,12 +9,11 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTab.Builder;
 import net.minecraft.world.item.Item.Properties;
 import net.minecraft.world.item.SpawnEggItem;
-import net.minecraftforge.common.ForgeSpawnEggItem;
-import net.minecraftforge.fml.ModList;
-import net.minecraftforge.fml.loading.FMLLoader;
-import net.minecraftforge.fml.loading.FMLPaths;
+import net.neoforged.fml.ModList;
+import net.neoforged.fml.loading.FMLLoader;
+import net.neoforged.neoforge.common.DeferredSpawnEggItem;
 
-public class ForgePlatformHelper implements IPlatformHelper {
+public class NeoForgePlatformHelper implements IPlatformHelper {
 
   @Override
   public String getPlatformName() {
@@ -49,6 +48,6 @@ public class ForgePlatformHelper implements IPlatformHelper {
   @Override
   public SpawnEggItem createSpawnEggItem(Supplier<EntityType<? extends Mob>> typeSupplier, int background, int highlight, Properties properties) {
 
-    return new ForgeSpawnEggItem(typeSupplier, background, highlight, properties);
+    return new DeferredSpawnEggItem(typeSupplier, background, highlight, properties);
   }
 }

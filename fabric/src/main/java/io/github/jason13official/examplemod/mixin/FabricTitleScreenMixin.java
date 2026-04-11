@@ -2,7 +2,6 @@ package io.github.jason13official.examplemod.mixin;
 
 import io.github.jason13official.examplemod.Constants;
 import io.github.jason13official.examplemod.platform.Services;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.TitleScreen;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

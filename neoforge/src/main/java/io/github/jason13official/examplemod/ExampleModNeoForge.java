@@ -10,25 +10,24 @@ import io.github.jason13official.examplemod.impl.common.registry.ModTiles;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.fml.loading.FMLLoader;
-import net.minecraftforge.registries.RegisterEvent;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.fml.loading.FMLLoader;
+import net.neoforged.neoforge.registries.RegisterEvent;
 
 @Mod(Constants.MOD_ID)
-public class ExampleModForge {
+public class ExampleModNeoForge {
 
   public static IEventBus EVENT_BUS;
 
-  public ExampleModForge(final FMLJavaModLoadingContext context) {
-    EVENT_BUS = context.getModEventBus();
+  public ExampleModNeoForge(final IEventBus modEventBus) {
+
+    EVENT_BUS = modEventBus;
 
     bind(Registries.BLOCK, ModBlocks::register);
     bind(Registries.ENTITY_TYPE, ModEntities::register);
@@ -41,14 +40,8 @@ public class ExampleModForge {
     EVENT_BUS.addListener((Consumer<FMLCommonSetupEvent>) event -> ExampleMod.init());
 
     if (FMLLoader.getDist() == Dist.CLIENT) {
-      new ExampleModClientForge(EVENT_BUS);
+      new ExampleModClientNeoForge(EVENT_BUS);
     }
-  }
-
-  @Deprecated
-  @SuppressWarnings("all")
-  public ExampleModForge() {
-    this(FMLJavaModLoadingContext.get());
   }
 
   public <T> void bind(ResourceKey<Registry<T>> registryKey, Consumer<BiConsumer<T, ResourceLocation>> source) {
