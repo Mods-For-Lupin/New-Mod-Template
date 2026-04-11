@@ -9,6 +9,6 @@ public class ExampleMod {
   }
 
   public static ResourceLocation identifier(final String path) {
-    return new ResourceLocation(Constants.MOD_ID, path);
+    return ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, path);
   }
 }
