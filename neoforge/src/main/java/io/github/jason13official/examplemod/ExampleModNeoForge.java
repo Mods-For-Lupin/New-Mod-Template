@@ -13,11 +13,16 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.resources.ResourceManager;
+import net.minecraft.server.packs.resources.SimplePreparableReloadListener;
+import net.minecraft.util.profiling.ProfilerFiller;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.fml.loading.FMLLoader;
+import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.AddReloadListenerEvent;
 import net.neoforged.neoforge.registries.RegisterEvent;
 
 @Mod(Constants.MOD_ID)
@@ -39,6 +44,10 @@ public class ExampleModNeoForge {
 
     EVENT_BUS.addListener((Consumer<FMLCommonSetupEvent>) event -> ExampleMod.init());
 
+    NeoForge.EVENT_BUS.addListener((Consumer<AddReloadListenerEvent>) event -> {
+      event.addListener(new ResourceReloadListener());
+    });
+
     if (FMLLoader.getDist() == Dist.CLIENT) {
       new ExampleModClientNeoForge(EVENT_BUS);
     }
@@ -51,5 +60,23 @@ public class ExampleModNeoForge {
         source.accept((t, rl) -> event.register(registryKey, rl, () -> t));
       }
     });
+  }
+
+  public static class ResourceReloadListener extends SimplePreparableReloadListener<Void> {
+
+    @Override
+    public String getName() {
+      return ExampleMod.identifier(Constants.MOD_ID).toString();
+    }
+
+    @Override
+    protected void apply(Void unused, ResourceManager resourceManager, ProfilerFiller profilerFiller) {
+      // ModConfig.load(Services.PLATFORM.getConfigDirectory());
+    }
+
+    @Override
+    protected Void prepare(ResourceManager resourceManager, ProfilerFiller profilerFiller) {
+      return null;
+    }
   }
 }
