@@ -50,6 +50,4 @@ public interface IPlatformHelper {
   }
 
   CreativeModeTab.Builder tabBuilder();
-
-  SpawnEggItem createSpawnEggItem(Supplier<EntityType<? extends Mob>> typeSupplier, int background, int highlight, Properties properties);
 }
