@@ -1,14 +1,13 @@
 package io.github.jason13official.examplemod;
 
-import net.minecraft.resources.ResourceLocation;
-
+import net.minecraft.resources.Identifier;
 
 public class ExampleMod {
 
   public static void init() {
   }
 
-  public static ResourceLocation identifier(final String path) {
-    return ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, path);
+  public static Identifier identifier(final String path) {
+    return Identifier.fromNamespaceAndPath(Constants.MOD_ID, path);
   }
 }
