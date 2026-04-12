@@ -11,8 +11,8 @@ import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
@@ -39,12 +39,12 @@ public class ExampleModNeoForge {
 
     EVENT_BUS.addListener((Consumer<FMLCommonSetupEvent>) event -> ExampleMod.init());
 
-    if (FMLLoader.getDist() == Dist.CLIENT) {
+    if (FMLLoader.getCurrent().getDist() == Dist.CLIENT) {
       new ExampleModClientNeoForge(EVENT_BUS);
     }
   }
 
-  public <T> void bind(ResourceKey<Registry<T>> registryKey, Consumer<BiConsumer<T, ResourceLocation>> source) {
+  public <T> void bind(ResourceKey<Registry<T>> registryKey, Consumer<BiConsumer<T, Identifier>> source) {
 
     EVENT_BUS.addListener((Consumer<RegisterEvent>) event -> {
       if (registryKey.equals(event.getRegistryKey())) {

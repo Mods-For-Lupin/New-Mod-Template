@@ -12,7 +12,7 @@ import java.util.function.Consumer;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class ExampleModFabric implements ModInitializer {
 
@@ -30,7 +30,7 @@ public class ExampleModFabric implements ModInitializer {
     ExampleMod.init();
   }
 
-  public <T> void bind(Registry<T> registry, Consumer<BiConsumer<T, ResourceLocation>> source) {
+  public <T> void bind(Registry<T> registry, Consumer<BiConsumer<T, Identifier>> source) {
 
     source.accept((t, rl) -> Registry.register(registry, rl, t));
   }
