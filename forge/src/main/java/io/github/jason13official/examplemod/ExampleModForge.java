@@ -14,7 +14,12 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.resources.ResourceManager;
+import net.minecraft.server.packs.resources.SimplePreparableReloadListener;
+import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -40,6 +45,10 @@ public class ExampleModForge {
 
     EVENT_BUS.addListener((Consumer<FMLCommonSetupEvent>) event -> ExampleMod.init());
 
+    MinecraftForge.EVENT_BUS.addListener((Consumer<AddReloadListenerEvent>) event -> {
+      event.addListener(new ResourceReloadListener());
+    });
+
     if (FMLLoader.getDist() == Dist.CLIENT) {
       new ExampleModClientForge(EVENT_BUS);
     }
@@ -58,5 +67,23 @@ public class ExampleModForge {
         source.accept((t, rl) -> event.register(registryKey, rl, () -> t));
       }
     });
+  }
+
+  public static class ResourceReloadListener extends SimplePreparableReloadListener<Void> {
+
+    @Override
+    public String getName() {
+      return ExampleMod.identifier(Constants.MOD_ID).toString();
+    }
+
+    @Override
+    protected void apply(Void unused, ResourceManager resourceManager, ProfilerFiller profilerFiller) {
+      // ModConfig.load(Services.PLATFORM.getConfigDirectory());
+    }
+
+    @Override
+    protected Void prepare(ResourceManager resourceManager, ProfilerFiller profilerFiller) {
+      return null;
+    }
   }
 }
