@@ -2,4 +2,4 @@ Mods-For-Lupin/**New-Mod-Template** is a customized implementation of [MultiLoad
 
 - [1.20.1](https://github.com/Mods-For-Lupin/New-Mod-Template/tree/1.20.1)
 - [1.21.1](https://github.com/Mods-For-Lupin/New-Mod-Template/tree/1.21.1)
-- [26.1](https://github.com/Mods-For-Lupin/New-Mod-Template/tree/26.1)
+- [26.1.2](https://github.com/Mods-For-Lupin/New-Mod-Template/tree/26.1.2)
