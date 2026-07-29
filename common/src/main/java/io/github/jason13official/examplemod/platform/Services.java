@@ -2,28 +2,43 @@ package io.github.jason13official.examplemod.platform;
 
 import io.github.jason13official.examplemod.Constants;
 import io.github.jason13official.examplemod.platform.services.IPlatformHelper;
+import java.util.ServiceConfigurationError;
 import java.util.ServiceLoader;
 
-// Service loaders are a built-in Java feature that allow us to locate implementations of an interface that vary from one
-// environment to another. In the context of MultiLoader we use this feature to access a mock API in the common code that
-// is swapped out for the platform specific implementation at runtime.
+/// @see <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/ServiceLoader.html">ServiceLoader</a> Oracle's Javadoc
 public class Services {
 
-  // In this example we provide a platform helper which provides information about what platform the mod is running on.
-  // For example this can be used to check if the code is running on Forge vs Fabric, or to ask the modloader if another
-  // mod is loaded.
   public static final IPlatformHelper PLATFORM = load(IPlatformHelper.class);
 
-  // This code is used to load a service for the current environment. Your implementation of the service must be defined
-  // manually by including a text file in META-INF/services named with the fully qualified class name of the service.
-  // Inside the file you should write the fully qualified class name of the implementation to load for the platform. For
-  // example our file on Forge points to ForgePlatformHelper while Fabric points to FabricPlatformHelper.
-  public static <T> T load(Class<T> clazz) {
+  /// modified from MultiLoader-Template original to enable merged service loader files i.e. our merged `io.github.jason13official.examplemod.platform.services.IPlatformHelper` might contain:
+  ///
+  /// ```
+  /// io.github.jason13official.examplemod.platform.FabricPlatformHelper
+  /// io.github.jason13official.examplemod.platform.ForgePlatformHelper
+  /// ```
+  private static <T> T load(Class<T> clazz) {
 
-    final T loadedService = ServiceLoader.load(clazz)
-        .findFirst()
-        .orElseThrow(() -> new NullPointerException("Failed to load service for " + clazz.getName()));
-    Constants.LOG.debug("Loaded {} for service {}", loadedService, clazz);
-    return loadedService;
+    boolean inDevHelperLoaded = PLATFORM != null && PLATFORM.isDevelopmentEnvironment();
+
+    if (inDevHelperLoaded) {
+      Constants.LOG.info("Loading service {} on {}", clazz.getName(), PLATFORM.getPlatformName());
+    }
+
+    for (T helper : ServiceLoader.load(clazz)) {
+      try {
+
+        if (PLATFORM == null && (helper instanceof IPlatformHelper platform && platform.isDevelopmentEnvironment())) {
+          Constants.LOG.info("Trying helper {} for service {} on {}", helper, clazz.getName(), platform.getPlatformName());
+        }
+
+        return helper;
+      } catch (NoClassDefFoundError | ServiceConfigurationError e) {
+
+        String s = e instanceof NoClassDefFoundError ? "helper definition not found; ignore this warning for merged mod files." : "helper service has malformed configuration.";
+        Constants.LOG.info("Skipping {}, {}", helper.getClass().getName(), s);
+      }
+    }
+
+    throw new IllegalStateException("Failed to load service for " + clazz.getName());
   }
 }
