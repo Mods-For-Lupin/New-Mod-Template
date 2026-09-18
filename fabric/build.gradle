@@ -11,6 +11,8 @@ dependencies {
     implementation 'com.electronwill.night-config:toml:3.6.0'
     include 'com.electronwill.night-config:core:3.6.0'
     include 'com.electronwill.night-config:toml:3.6.0'
+
+  implementation "maven.modrinth:monolib:fabric-26.1.2-4.1.1"
 }
 
 loom {
