@@ -48,6 +48,4 @@ public interface IPlatformHelper {
 
     return getGameDirectory().resolve("config");
   }
-
-  CreativeModeTab.Builder tabBuilder();
 }
