@@ -13,7 +13,7 @@ plugins {
     id 'net.neoforged.moddev.legacyforge' version '2.0.77' apply(false)
 }
 
-// orce :fabric and :forge to configure so remapJar/jar are registered before reference
+// force :fabric and :forge to configure so remapJar/jar are registered before reference
 evaluationDependsOn(':fabric')
 evaluationDependsOn(':forge')
 
